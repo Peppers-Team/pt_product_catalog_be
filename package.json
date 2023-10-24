@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint . --ignore-path .gitignore --fix",
     "build": "npx tsc",
     "start": "npm run build && node build/index.js",
     "dev": "npm run build && nodemon build/index.js"

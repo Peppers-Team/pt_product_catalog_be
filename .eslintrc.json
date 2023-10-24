@@ -6,7 +6,7 @@
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
-        "extends: @mate-academy/eslint-config"
+        "@mate-academy/eslint-config"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {

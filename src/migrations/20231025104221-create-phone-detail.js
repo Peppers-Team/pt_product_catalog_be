@@ -38,7 +38,7 @@ module.exports = {
         type: Sequelize.ARRAY(Sequelize.STRING),
       },
       description: {
-        type: Sequelize.ARRAY(Sequelize.JSONB),
+        type: Sequelize.JSONB,
       },
       screen: {
         type: Sequelize.STRING,

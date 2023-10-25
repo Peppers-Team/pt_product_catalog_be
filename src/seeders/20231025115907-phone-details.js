@@ -6,10 +6,7 @@ const { getPhoneDetails } = require('./data/details/getPhonesDetails');
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('PhoneDetails',
-      getPhoneDetails().map(value => ({
-        ...value,
-        description: JSON.parse(value.description),
-      })), {});
+      getPhoneDetails(), {});
   },
 
   async down(queryInterface, Sequelize) {

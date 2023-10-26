@@ -1,6 +1,7 @@
 'use strict';
 
-const { getDetails } = require("../utils/groupDetails");
+const { getDetails } = require('../utils/groupDetails');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -9,5 +10,5 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('Details', null, {});
-  }
+  },
 };

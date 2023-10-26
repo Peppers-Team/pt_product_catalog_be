@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const DB_URI = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}`;
+const DB_URI = process.env.URL;
 
 const settings = {
   url: DB_URI,

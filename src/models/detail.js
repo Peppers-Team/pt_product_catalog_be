@@ -1,8 +1,9 @@
 'use strict';
+
 const {
-  Model
+  Model,
 } = require('sequelize');
-const { flatten } = require("express/lib/utils");
+
 module.exports = (sequelize, DataTypes) => {
   class Detail extends Model {
     /**
@@ -17,14 +18,16 @@ module.exports = (sequelize, DataTypes) => {
 
   Detail.init({
     id: {
-      type: DataTypes.STRING, allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true,
     },
     namespaceId: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     name: {
-      type: DataTypes.STRING, allowNull: false
+      type: DataTypes.STRING, allowNull: false,
     },
     capacityAvailable: {
       type: DataTypes.ARRAY(DataTypes.STRING),
@@ -56,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.JSONB,
-      allowNull: false
+      allowNull: false,
     },
     screen: {
       type: DataTypes.STRING,
@@ -72,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     ram: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     camera: {
       type: DataTypes.STRING,
@@ -85,9 +88,10 @@ module.exports = (sequelize, DataTypes) => {
     cell: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
-    }
+    },
   }, {
     sequelize, modelName: 'Detail', timestamps: false,
   });
+
   return Detail;
 };

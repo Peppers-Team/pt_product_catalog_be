@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 
@@ -14,7 +15,12 @@ app.get('/', (_, res) => {
 	res.send('Hello World!');
 });
 
-app.get('/public/img/:deviceType/:deviceName/:deviceColor/:image', getImage);
+app.use(express.static(path.resolve('public'), {
+	index: false,
+	redirect: false,
+	immutable: true,
+	maxAge: '7d',
+}));
 
 app.use('/products', productsRouter);
 

@@ -49,4 +49,10 @@ const getRecommendedProducts = async (req, res) => {
 	res.send(data);
 }
 
-module.exports = { getAll, getById, getRecommendedProducts };
+const getNewProducts = async (req, res) => {
+	const data = await service.getNewProducts();
+
+	res.send(data);
+}
+
+module.exports = { getAll, getById, getRecommendedProducts, getNewProducts };

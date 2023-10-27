@@ -1,4 +1,5 @@
 const { Product, Detail } = require('../models');
+const { Op } = require("sequelize");
 
 const getAll = async ({ offset, limit, category }) => {
 	const query = { offset, limit };
@@ -14,7 +15,7 @@ const getAll = async ({ offset, limit, category }) => {
 	return data;
 };
 
-const get = async(productId) => {
+const get = async (productId) => {
 	const product = await Product.findByPk(productId);
 	const detail = await product?.getDetail();
 
@@ -32,10 +33,22 @@ const get = async(productId) => {
 	return { product, details };
 }
 
-const getRecommended = async(params) => {
+const getRecommended = async (params) => {
 	const recommendedProducts = await Product.findAll(params);
 
 	return recommendedProducts;
 }
 
-module.exports = { getAll, get, getRecommended };
+const getNewProducts = async () => {
+	const data = await Product.findAll({
+		where: {
+			year: {
+				[Op.gte]: 2021,
+			},
+		},
+	});
+
+	return data;
+}
+
+module.exports = { getAll, get, getRecommended, getNewProducts };

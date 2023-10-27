@@ -1,12 +1,17 @@
 const { Product } = require('../models');
 
-const getAll = async(limit, offset) => {
-  const data = await Product.findAndCountAll({
-    limit,
-    offset,
-  });
+const getAll = async ({ offset, limit, category }) => {
+	const query = { offset, limit };
 
-  return data;
+	if (category) {
+		query.where = {
+			category
+		}
+	}
+
+	const data = await Product.findAndCountAll(query);
+
+	return data;
 };
 
 module.exports = { getAll };

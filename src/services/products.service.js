@@ -51,4 +51,14 @@ const getNewProducts = async () => {
 	return data;
 }
 
-module.exports = { getAll, get, getRecommended, getNewProducts };
+const getDiscount = async () => {
+	const data = await Product.findAll();
+
+	const getDiscount = (value) => value.fullPrice - value.price;
+
+	return data.sort((a, b) => {
+		return getDiscount(b) - getDiscount(a);
+	})
+}
+
+module.exports = { getAll, get, getRecommended, getNewProducts, getDiscount };

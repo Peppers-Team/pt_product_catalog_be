@@ -50,9 +50,21 @@ const getRecommendedProducts = async (req, res) => {
 }
 
 const getNewProducts = async (req, res) => {
-	const data = await service.getNewProducts();
+	const data = await service.getNewProducts({
+		where: {
+			year: {
+				[Op.gte]: 2021,
+			},
+		}
+	});
 
 	res.send(data);
 }
 
-module.exports = { getAll, getById, getRecommendedProducts, getNewProducts };
+const getDiscount = async (req, res) => {
+	const data = await service.getDiscount();
+
+	res.send(data);
+}
+
+module.exports = { getAll, getById, getRecommendedProducts, getNewProducts, getDiscount };

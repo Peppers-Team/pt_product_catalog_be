@@ -1,12 +1,32 @@
 const { Product, Detail } = require('../models');
 const { Op } = require("sequelize");
 
-const getAll = async ({ offset, limit, category }) => {
+const getAll = async ({ offset, limit, category, sortBy }) => {
 	const query = { offset, limit };
 
 	if (category) {
 		query.where = {
 			category
+		}
+	}
+
+	if (sortBy) {
+		switch (sortBy) {
+			case 'newest':
+				query.order = [
+					['year', 'DESC']
+				];
+				break;
+			case 'alphabetically':
+				query.order = [
+					['name', 'ASC']
+				];
+				break;
+			case 'cheapest':
+				query.order = [
+					['price', 'ASC']
+				];
+				break;
 		}
 	}
 

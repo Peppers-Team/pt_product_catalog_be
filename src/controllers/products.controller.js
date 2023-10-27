@@ -2,10 +2,11 @@ const service = require('../services/products.service');
 const { Op } = require("sequelize");
 
 const getAll = async (req, res) => {
-	const { offset, limit } = req.query;
+	const { offset, limit, sortBy } = req.query;
 
 	if ((offset && Number.isNaN(+offset) || +offset < 0)
-		|| (limit && Number.isNaN(+limit) || +limit < 0)) {
+		|| (limit && Number.isNaN(+limit) || +limit < 0)
+		|| !['newest', 'alphabetically', 'cheapest'].includes(sortBy)) {
 		res.sendStatus(400);
 
 		return;

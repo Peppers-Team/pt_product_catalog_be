@@ -6,8 +6,6 @@ const app = express();
 
 const { productsRouter } = require('./routes/products.routes');
 
-const { getImage } = require('./controllers/public.controller')
-
 const port = 3000;
 
 app.use(cors());

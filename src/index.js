@@ -1,10 +1,13 @@
 const express = require('express');
 
 const app = express();
+const cors = require('cors');
 
 const { productsRouter } = require('./routes/products.routes');
 
 const port = 3000;
+
+app.use(cors());
 
 app.get('/', (_, res) => {
   res.send('Hello World!');

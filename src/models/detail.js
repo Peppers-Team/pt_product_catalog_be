@@ -1,9 +1,7 @@
 'use strict';
-
 const {
-  Model,
+  Model
 } = require('sequelize');
-
 module.exports = (sequelize, DataTypes) => {
   class Detail extends Model {
     /**
@@ -13,9 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Detail.hasOne(models.Product, {
+        foreignKey: 'itemId',
+      });
     }
   }
-
   Detail.init({
     id: {
       type: DataTypes.STRING,
@@ -90,8 +90,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {
-    sequelize, modelName: 'Detail', timestamps: false,
+    sequelize,
+    modelName: 'Detail',
+    tableName: 'details',
+    timestamps: false,
   });
-
   return Detail;
 };

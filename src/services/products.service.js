@@ -1,4 +1,4 @@
-const { Product } = require('../models');
+const { Product, Detail } = require('../models');
 
 const getAll = async ({ offset, limit, category }) => {
 	const query = { offset, limit };
@@ -14,4 +14,22 @@ const getAll = async ({ offset, limit, category }) => {
 	return data;
 };
 
-module.exports = { getAll };
+const get = async(productId) => {
+	const product = await Product.findByPk(productId);
+	const detail = await product?.getDetail();
+
+	if (!detail) {
+		return;
+	}
+
+	const details = await Detail.findAll({
+		where: {
+			namespaceId: detail.namespaceId,
+		},
+	});
+
+
+	return { product, details };
+}
+
+module.exports = { getAll, get };

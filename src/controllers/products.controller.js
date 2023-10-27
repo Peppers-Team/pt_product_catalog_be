@@ -6,4 +6,10 @@ const getAll = async(req, res) => {
   res.send(data);
 };
 
-module.exports = { getAll };
+const getById = async(req, res) => {
+  const data = await service.get(+req.params.id);
+
+  res.send(data);
+}
+
+module.exports = { getAll, getById };

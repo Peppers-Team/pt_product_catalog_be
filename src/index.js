@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
 
@@ -6,6 +7,7 @@ const { productsRouter } = require('./routes/products.routes');
 
 const port = 3000;
 
+app.use(cors());
 app.get('/', (_, res) => {
   res.send('Hello World!');
 });

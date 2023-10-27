@@ -32,4 +32,10 @@ const get = async(productId) => {
 	return { product, details };
 }
 
-module.exports = { getAll, get };
+const getRecommended = async(params) => {
+	const recommendedProducts = await Product.findAll(params);
+
+	return recommendedProducts;
+}
+
+module.exports = { getAll, get, getRecommended };

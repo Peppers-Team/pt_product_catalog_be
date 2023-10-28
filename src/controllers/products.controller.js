@@ -6,7 +6,7 @@ const getAll = async (req, res) => {
 
 	if ((offset && Number.isNaN(+offset) || +offset < 0)
 		|| (limit && Number.isNaN(+limit) || +limit < 0)
-		|| !['newest', 'alphabetically', 'cheapest'].includes(sortBy)) {
+		|| (sortBy &&!['newest', 'alphabetically', 'cheapest'].includes(sortBy))) {
 		res.sendStatus(400);
 
 		return;

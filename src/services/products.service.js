@@ -37,20 +37,20 @@ const getAll = async ({ offset, limit, category, sortBy }) => {
 
 const get = async (productId) => {
 	const product = await Product.findByPk(productId);
-	const detail = await product?.getDetail();
+	const selectedProduct = await product?.getDetail();
 
-	if (!detail) {
+	if (!selectedProduct) {
 		return;
 	}
 
 	const details = await Detail.findAll({
 		where: {
-			namespaceId: detail.namespaceId,
+			namespaceId: selectedProduct.namespaceId,
 		},
 	});
 
 
-	return { product, details };
+	return { product: selectedProduct, details };
 }
 
 const getRecommended = async (params) => {

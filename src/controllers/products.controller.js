@@ -37,6 +37,8 @@ const getRecommendedProducts = async (req, res) => {
 	}
 	const selectedProduct = await service.get(+req.params.id);
 
+	console.log(selectedProduct.details)
+
 	const params = {
 		where: {
 			year: {

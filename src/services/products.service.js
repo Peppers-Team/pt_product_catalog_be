@@ -50,7 +50,7 @@ const get = async (productId) => {
 	});
 
 
-	return { product: selectedProduct, details };
+	return { product, selectedProduct, details };
 }
 
 const getRecommended = async (params) => {

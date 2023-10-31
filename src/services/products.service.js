@@ -1,7 +1,7 @@
 const { Product, Detail } = require('../models');
 const { Op } = require("sequelize");
 
-const getAll = async ({ offset, limit, category, sortBy, query }) => {
+const getAll = async ({ offset, limit, category, sortBy, query, priceFrom, priceTo }) => {
 	const params = { offset, limit };
 
 	if (category) {
@@ -35,7 +35,16 @@ const getAll = async ({ offset, limit, category, sortBy, query }) => {
 			name: {
 			[Op.substring]: `${query}`,
 			},
-			...params.where
+			...params.where,
+		}
+	}
+
+	if (priceFrom && priceTo) {
+		params.where = {
+			price: {
+				[Op.between]: [priceFrom, priceTo],
+			},
+			...params.where,
 		}
 	}
 

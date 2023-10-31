@@ -2,12 +2,16 @@ const service = require('../services/products.service');
 const { Op } = require("sequelize");
 
 const getAll = async (req, res) => {
-	const { offset, limit, sortBy, category } = req.query;
+	const { offset, limit, sortBy, category, priceFrom, priceTo } = req.query;
 
 	if ((offset && Number.isNaN(+offset) || +offset < 0)
 		|| (limit && Number.isNaN(+limit) || +limit < 0 || ![4, 8, 16].includes(+limit))
 		|| (sortBy && !['newest', 'alphabetically', 'cheapest'].includes(sortBy))
-		|| (category && !['phones', 'tablets', 'accessories'].includes(category))) {
+		|| (category && !['phones', 'tablets', 'accessories'].includes(category))
+		|| (priceFrom && Number.isNaN(+priceFrom) || +priceFrom < 0)
+		|| (priceTo && Number.isNaN(+priceTo) || +priceTo < 0)
+
+	) {
 		res.sendStatus(400);
 
 		return;

@@ -5,7 +5,7 @@ const getAll = async (req, res) => {
 	const { offset, limit, sortBy } = req.query;
 
 	if ((offset && Number.isNaN(+offset) || +offset < 0)
-		|| (limit && Number.isNaN(+limit) || +limit < 0)
+		|| (limit && Number.isNaN(+limit) || +limit < 0 || ![4, 8, 16].includes(+limit))
 		|| (sortBy &&!['newest', 'alphabetically', 'cheapest'].includes(sortBy))) {
 		res.sendStatus(400);
 
@@ -36,13 +36,11 @@ const getRecommendedProducts = async (req, res) => {
 		return;
 	}
 	const selectedProduct = await service.get(+req.params.id);
-
-	console.log(selectedProduct.details)
-
+	
 	const params = {
 		where: {
 			year: {
-				[Op.between]: [selectedProduct.product.year, 2023],
+				[Op.between]: [selectedProduct.product.year - 2, 2023],
 			},
 		},
 	};

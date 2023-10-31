@@ -13,7 +13,13 @@ To run the server in dev mode(watch for changes and restart on update) use `npm 
 
 The server will be opened on `http://localhost:3000`
 
-# API Reference
+
+# Product catalog API
+
+A short description how to interact with this API and what it returns.
+
+
+## API Reference
 
 
 Base URL `https://pt-api-8nrp.onrender.com`
@@ -80,12 +86,12 @@ Base URL `https://pt-api-8nrp.onrender.com`
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `category`| `string` | **Required**. Valid data: 'phones', 'tablets' or 'accessories' |
-| `limit`||`string`||**Required**. Used for db pagination. Valid data: `16` `8` `4`
-|`offset`|`string`||Amount of pages to skip|
-|`sortBy`|`string`||Type of sorting. Valid data: `newest`, `alphabetically`, `cheapest`|
-|`query`|`string`||Query string to search by name of the product|
-|`priceFrom`|`number`||A number > 0, which represents min price. Product price >= `priceFrom`|
-|`priceTo`|`number`||A number > 0, which represents max price. Product price <= `priceTo`|
+| `limit`|`string`|**Required**. Used for db pagination. Valid data: `16` `8` `4`
+|`offset`|`string`|Amount of pages to skip|
+|`sortBy`|`string`|Type of sorting. Valid data: `newest`, `alphabetically`, `cheapest`|
+|`query`|`string`|Query string to search by name of the product|
+|`priceFrom`|`number`|A number > 0, which represents min price. Product price >= `priceFrom`|
+|`priceTo`|`number`|A number > 0, which represents max price. Product price <= `priceTo`|
 
 #### Response format:
     count: number.

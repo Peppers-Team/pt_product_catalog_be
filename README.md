@@ -113,6 +113,10 @@ Base URL `https://pt-api-8nrp.onrender.com`
     GET https://pt-api-8nrp.onrender.com/products/:id
 ```
 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`| `string` | **Required**. product itemId from GET all products |
+
 #### Response format:
 ```
 {
@@ -129,7 +133,7 @@ https://pt-api-8nrp.onrender.com/products/:id/recommended
 ```
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `id`| `number` | **Required**. product id from GET all products |
+| `id`| `string` | **Required**. product itemId from GET all products |
 
 #### Response format:
 ```

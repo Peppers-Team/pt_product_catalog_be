@@ -8,6 +8,7 @@ const productsRouter = express.Router();
 productsRouter.get('/', controller.getAll);
 productsRouter.get('/new', controller.getNewProducts);
 productsRouter.get('/discount', controller.getDiscount);
+productsRouter.get('/count', controller.getItemsCount);
 productsRouter.get('/:id', controller.getById);
 productsRouter.get('/:id/recommended', controller.getRecommendedProducts);
 

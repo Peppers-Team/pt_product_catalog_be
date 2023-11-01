@@ -13,19 +13,13 @@ const getAll = async ({ offset, limit, category, sortBy, query, priceFrom, price
 	if (sortBy) {
 		switch (sortBy) {
 			case 'newest':
-				params.order = [
-					['year', 'DESC']
-				];
+				params.order = [['year', 'DESC']];
 				break;
 			case 'alphabetically':
-				params.order = [
-					['name', 'ASC']
-				];
+				params.order = [['name', 'ASC']];
 				break;
 			case 'cheapest':
-				params.order = [
-					['price', 'ASC']
-				];
+				params.order = [['price', 'ASC']];
 				break;
 		}
 	}
@@ -33,9 +27,8 @@ const getAll = async ({ offset, limit, category, sortBy, query, priceFrom, price
 	if (query) {
 		params.where = {
 			name: {
-			[Op.match]: Sequelize.fn('lower', query),
-			},
-			...params.where,
+				[Op.match]: Sequelize.fn('lower', query),
+			}, ...params.where,
 		}
 	}
 
@@ -43,8 +36,7 @@ const getAll = async ({ offset, limit, category, sortBy, query, priceFrom, price
 		params.where = {
 			price: {
 				[Op.between]: [priceFrom, priceTo],
-			},
-			...params.where,
+			}, ...params.where,
 		}
 	}
 
@@ -62,10 +54,10 @@ const get = async (productId) => {
 	}
 
 	const details = await Detail.findAll({
-		where: {
-			namespaceId: selectedProduct.namespaceId,
-		},
-	});
+																				 where: {
+																					 namespaceId: selectedProduct.namespaceId,
+																				 },
+																			 });
 
 
 	return { product, selectedProduct, details };
@@ -79,12 +71,12 @@ const getRecommended = async (params) => {
 
 const getNewProducts = async () => {
 	const data = await Product.findAll({
-		where: {
-			year: {
-				[Op.gte]: 2021,
-			},
-		},
-	});
+																			 where: {
+																				 year: {
+																					 [Op.gte]: 2021,
+																				 },
+																			 },
+																		 });
 
 	return data;
 }
@@ -99,4 +91,23 @@ const getDiscount = async () => {
 	})
 }
 
-module.exports = { getAll, get, getRecommended, getNewProducts, getDiscount };
+const getItemsCount = async () => {
+	const data = await Product.findAll();
+
+	const phonesLength = data.filter(
+		({ category }) => category === 'phones').length;
+
+	const tabletsLength = data.filter(
+		({ category }) => category === 'tablets').length;
+
+	const accessoriesLength = data.filter(
+		({ category }) => category === 'accessories').length;
+
+	return {
+		phonesCount: phonesLength,
+		tabletsCount: tabletsLength,
+		accessoriesCount: accessoriesLength,
+	}
+}
+
+module.exports = { getAll, get, getRecommended, getNewProducts, getDiscount, getItemsCount };

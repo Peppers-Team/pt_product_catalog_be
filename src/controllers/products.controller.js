@@ -35,13 +35,13 @@ const getById = async (req, res) => {
 }
 
 const getRecommendedProducts = async (req, res) => {
-	if (Number.isNaN(req.params.id)) {
+	if (!Number.isNaN(+req.params.id)) {
 		res.sendStatus(400);
 
 		return;
 	}
-	const selectedProduct = await service.get(+req.params.id);
-	
+	const selectedProduct = await service.get(req.params.id);
+
 	const params = {
 		where: {
 			year: {

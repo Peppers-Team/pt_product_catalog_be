@@ -64,7 +64,7 @@ const get = async (productId) => {
 	});
 
 
-	return { product, selectedProduct, details };
+	return { product: product[0], selectedProduct, details };
 }
 
 const getRecommended = async (params) => {

@@ -46,21 +46,20 @@ const getAll = async ({ offset, limit, category, sortBy, query, priceFrom, price
 };
 
 const get = async (productId) => {
-	const product = await Product.findByPk(productId);
-	const selectedProduct = await product?.getDetail();
+	const selectedProduct = await Detail.findByPk(productId);
 
 	if (!selectedProduct) {
 		return;
 	}
 
 	const details = await Detail.findAll({
-																				 where: {
-																					 namespaceId: selectedProduct.namespaceId,
-																				 },
-																			 });
+		where: {
+			namespaceId: selectedProduct.namespaceId,
+		},
+	});
 
 
-	return { product, selectedProduct, details };
+	return { selectedProduct, details };
 }
 
 const getRecommended = async (params) => {
@@ -71,12 +70,12 @@ const getRecommended = async (params) => {
 
 const getNewProducts = async () => {
 	const data = await Product.findAll({
-																			 where: {
-																				 year: {
-																					 [Op.gte]: 2021,
-																				 },
-																			 },
-																		 });
+		where: {
+			year: {
+				[Op.gte]: 2021,
+			},
+		},
+	});
 
 	return data;
 }
@@ -94,19 +93,14 @@ const getDiscount = async () => {
 const getItemsCount = async () => {
 	const data = await Product.findAll();
 
-	const phonesLength = data.filter(
-		({ category }) => category === 'phones').length;
+	const phonesLength = data.filter(({ category }) => category === 'phones').length;
 
-	const tabletsLength = data.filter(
-		({ category }) => category === 'tablets').length;
+	const tabletsLength = data.filter(({ category }) => category === 'tablets').length;
 
-	const accessoriesLength = data.filter(
-		({ category }) => category === 'accessories').length;
+	const accessoriesLength = data.filter(({ category }) => category === 'accessories').length;
 
 	return {
-		phonesCount: phonesLength,
-		tabletsCount: tabletsLength,
-		accessoriesCount: accessoriesLength,
+		phonesCount: phonesLength, tabletsCount: tabletsLength, accessoriesCount: accessoriesLength,
 	}
 }
 

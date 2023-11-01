@@ -23,13 +23,13 @@ const getAll = async (req, res) => {
 };
 
 const getById = async (req, res) => {
-	if (Number.isNaN(+req.params.id)) {
+	if (!Number.isNaN(+req.params.id)) {
 		res.sendStatus(400);
 
 		return;
 	}
 
-	const data = await service.get(+req.params.id);
+	const data = await service.get(req.params.id)
 
 	res.send(data);
 }
